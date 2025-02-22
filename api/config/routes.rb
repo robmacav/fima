@@ -3,4 +3,7 @@ Rails.application.routes.draw do
 
   resources :expenses
   resources :categories
+
+  get 'expense-status', to: 'expense_status#index'
+  get 'expense-payment-methods', to: 'expense_payment_methods#index'
 end

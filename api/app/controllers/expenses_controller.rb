@@ -44,6 +44,6 @@ class ExpensesController < ApplicationController
     end
 
     def expense_params
-      params.expect(expense: [ :title, :description, :value, :date, :payment_method_id, :category_id ])
+      params.expect(expense: [ :title, :description, :value, :date, :expense_payment_method_id, :expense_status_id, :expense_category_id ])
     end
 end

@@ -9,7 +9,7 @@ class CreateExpenses < ActiveRecord::Migration[8.0]
       t.string :description, null: false
     end
 
-    create_table :expense_status do |t|
+    create_table :expense_statuses do |t|
       t.string :description, null: false
     end
 
@@ -20,7 +20,7 @@ class CreateExpenses < ActiveRecord::Migration[8.0]
       t.string :date, limit: 8, null: false
       t.references :expense_payment_method, null: false, foreign_key: true
       t.references :expense_status, null: false, foreign_key: true
-      t.references :category, null: false, foreign_key: true
+      t.references :expense_category, null: false, foreign_key: true
 
       t.timestamps
     end
