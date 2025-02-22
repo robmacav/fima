@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_19_002234) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_19_010613) do
   create_table "expense_categories", force: :cascade do |t|
     t.string "description", null: false
     t.string "color", limit: 6, null: false
@@ -39,7 +39,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_19_002234) do
     t.index ["expense_status_id"], name: "index_expenses_on_expense_status_id"
   end
 
+  create_table "income_statuses", force: :cascade do |t|
+    t.string "description", null: false
+  end
+
+  create_table "incomes", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description"
+    t.decimal "value", null: false
+    t.string "date", limit: 8, null: false
+    t.integer "income_status_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["income_status_id"], name: "index_incomes_on_income_status_id"
+  end
+
   add_foreign_key "expenses", "expense_categories"
   add_foreign_key "expenses", "expense_payment_methods"
   add_foreign_key "expenses", "expense_statuses"
+  add_foreign_key "incomes", "income_statuses"
 end
