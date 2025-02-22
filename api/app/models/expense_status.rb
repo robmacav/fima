@@ -1,0 +1,2 @@
+class ExpenseStatus < ApplicationRecord
+end
