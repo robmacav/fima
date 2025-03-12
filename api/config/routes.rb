@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :cards
+  resources :expenses
   resources :expense_categories, path: 'expense-categories'
 
   get "up" => "rails/health#show", as: :rails_health_check
