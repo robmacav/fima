@@ -1,38 +1,34 @@
-import { cn } from "@/lib/utils"
+import React, { useState } from "react";
+import { cn } from "@/lib/utils";
 
-export function MainNav({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLElement>) {
+interface MainNavProps extends React.HTMLAttributes<HTMLElement> {
+  setCurrentPage: (page: string) => void;
+}
+
+export function MainNav({ className, setCurrentPage, ...props }: MainNavProps) {
+  const [activePage, setActivePage] = useState("dashboard");
+
+  const handleNavigation = (page: string) => {
+    setCurrentPage(page);
+    setActivePage(page);
+  };
+
   return (
-    <nav
-      className={cn("flex items-center space-x-4 lg:space-x-6", className)}
-      {...props}
-    >
-      <a
-        href=""
-        className="text-sm font-medium transition-colors hover:text-primary"
-      >
-        Dashboard
-      </a>
-      <a
-        href=""
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
-        Receitas
-      </a>
-      <a
-        href=""
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
-        Despesas
-      </a>
-      <a
-        href=""
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
-        Categorias
-      </a>
+    <nav className={cn("flex items-center space-x-4 lg:space-x-6", className)} {...props}>
+      {["dashboard", "incomes", "expenses", "categories"].map((page) => (
+        <button
+          key={page}
+          onClick={() => handleNavigation(page)}
+          className={cn(
+            "text-sm font-medium transition-colors",
+            activePage === page ? "text-primary" : "text-muted-foreground hover:text-primary"
+          )}
+        >
+          {page === "dashboard" ? "Dashboard" : 
+           page === "incomes" ? "Receitas" : 
+           page === "expenses" ? "Despesas" : "Categorias"}
+        </button>
+      ))}
     </nav>
-  )
+  );
 }
